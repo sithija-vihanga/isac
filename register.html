@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - IUA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background: linear-gradient(to bottom, #e9ecef, #d3d7db); display: block; }
+        h1, h2 { font-family: 'Montserrat', sans-serif; }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu { display: none; position: absolute; background: white; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; }
+        .dropdown-menu a { display: block; padding: 10px 20px; color: gray-700; }
+        .dropdown-menu a:hover { color: blue-600; background: #f1f1f1; }
+        .error { color: red; font-size: 0.875rem; display: none; }
+        #form-feedback { transition: opacity 0.3s; }
+        #form-iframe { display: none; }
+        select { appearance: none; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="gray"><path d="M6 9l4-5H2z"/></svg>') no-repeat right 0.75rem center; }
+    </style>
+</head>
+<body>
+    <header class="sticky top-0 bg-white shadow-md z-10">
+        <nav class="container mx-auto py-4 flex justify-between items-center">
+            <h1><a href="index.html#home" class="text-2xl font-bold text-blue-600">IUA</a> <span class="text-2xl text-gray-500 font-semibold tracking-tight">|</span> 
+                <span class="text-xl text-gray-500 font-semibold tracking-tight"> International University Admissions</span>
+            </h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html#home" class="text-gray-700 hover:text-blue-600">Home</a></li>
+                <li class="relative dropdown">
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600">About <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="index.html#about" class="text-gray-700 hover:text-blue-600">About IUA</a>
+                        <a href="index.html#why-italy" class="text-gray-700 hover:text-blue-600">Why Italy</a>
+                    </div>
+                </li>
+                <li><a href="index.html#universities" class="text-gray-700 hover:text-blue-600">Universities</a></li>
+                <li><a href="index.html#scholarships" class="text-gray-700 hover:text-blue-600">Scholarships</a></li>
+                <li class="relative dropdown">
+                    <a href="index.html#resources" class="text-gray-700 hover:text-blue-600">Resources <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="index.html#visa" class="text-gray-700 hover:text-blue-600">Visa</a>
+                        <a href="index.html#tolc" class="text-gray-700 hover:text-blue-600">Entrance Exam Prep</a>
+                    </div>
+                </li>
+                <li><a href="register.html" class="text-gray-700 hover:text-blue-600">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">Register for IUA Engineering Programs</h2>
+        <p class="text-center mb-8 text-gray-700 max-w-3xl mx-auto">Fill out the form below to register or inquire. We'll review your details and get back to you soon.</p>
+        <form id="registration-form" action="https://getform.io/f/bjjrlkmb" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-8 rounded shadow">
+            <input type="hidden" name="_gotcha" style="display:none !important">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                <input type="text" id="name" name="name" required class="w-full p-2 border rounded">
+                <p class="error" id="name-error" data-original="Please enter your name.">Please enter your name.</p>
+            </div>
+            <div class="mb-4">
+                <label for="whatsapp" class="block text-gray-700 font-bold mb-2">WhatsApp Number</label>
+                <input type="tel" id="whatsapp" name="whatsapp" required class="w-full p-2 border rounded" placeholder="+1234567890">
+                <p class="error" id="whatsapp-error" data-original="Please enter a valid phone number.">Please enter a valid phone number.</p>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                <input type="email" id="email" name="email" required class="w-full p-2 border rounded">
+                <p class="error" id="email-error" data-original="Please enter a valid email address.">Please enter a valid email address.</p>
+            </div>
+            <div class="mb-4">
+                <label for="subject" class="block text-gray-700 font-bold mb-2">Subject</label>
+                <select id="subject" name="subject" required class="w-full p-2 border rounded">
+                    <option value="" disabled selected>Select a subject</option>
+                    <option value="IUA Engineering Program Registration">IUA Engineering Program Registration</option>
+                    <option value="Information Inquiry">Information Inquiry</option>
+                    <option value="Other">Other</option>
+                </select>
+                <p class="error" id="subject-error" data-original="Please select a subject.">Please select a subject.</p>
+            </div>
+            <div class="mb-4">
+                <label for="al_results" class="block text-gray-700 font-bold mb-2">A/L Results (e.g., Subjects and Grades)</label>
+                <textarea id="al_results" name="al_results" required class="w-full p-2 border rounded" rows="4"></textarea>
+                <p class="error" id="al_results-error" data-original="Please enter your A/L results.">Please enter your A/L results.</p>
+            </div>
+            <div class="mb-4">
+                <label for="file" class="block text-gray-700 font-bold mb-2">Attach Proof of A/L Results (PDF/Image, max 1MB)</label>
+                <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png" class="w-full p-2 border rounded">
+                <p class="error" id="file-error" data-original="Please upload a valid file (PDF, JPG, PNG, max 1MB).">Please upload a valid file (PDF, JPG, PNG, max 1MB).</p>
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block text-gray-700 font-bold mb-2">Additional Message</label>
+                <textarea id="message" name="message" class="w-full p-2 border rounded" rows="3" placeholder="Any additional information or questions..."></textarea>
+            </div>
+            <button type="submit" class="bg-gradient-to-r from-blue-600 to-green-600 text-white px-6 py-2 rounded hover:opacity-90 w-full">Submit</button>
+        </form>
+        <div id="form-feedback" class="mt-4 p-4 rounded text-center hidden"></div>
+        <iframe id="form-iframe" name="form-iframe" style="display: none;"></iframe>
+    </section>
+
+    <footer class="bg-blue-600 text-white py-6 text-center">
+        <p>&copy; 2025 IUA. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
