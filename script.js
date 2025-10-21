@@ -63,32 +63,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply content (real or fallback)
     function applyContent(content) {
         console.log('Applying content:', Object.keys(content));
-        document.getElementById('about-content').innerText = content.about;
+        document.getElementById('about-content').innerHTML = content.about; // Changed to innerHTML for richer content
         document.getElementById('why-italy-content').innerHTML = content.whyItaly;
         document.getElementById('tolc-description').innerHTML = content.tolc_description;
         document.getElementById('classes-description').innerHTML = content.classes_description;
-        document.getElementById('duration').innerText = content.duration;
+        document.getElementById('duration').innerHTML = content.duration;
         const syllabusList = document.getElementById('syllabus-list');
         syllabusList.innerHTML = '';
         content.syllabus_items.forEach(item => {
             const li = document.createElement('li');
-            li.innerText = item;
+            li.innerHTML = item;
             syllabusList.appendChild(li);
         });
-        document.getElementById('university1-name').innerText = content.university1_name;
-        document.getElementById('university1-degrees').innerText = content.university1_degrees;
+        document.getElementById('university1-name').innerHTML = content.university1_name;
+        document.getElementById('university1-degrees').innerHTML = content.university1_degrees;
         document.getElementById('university1-description').innerHTML = content.university1_description;
-        document.getElementById('university2-name').innerText = content.university2_name;
-        document.getElementById('university2-degrees').innerText = content.university2_degrees;
+        document.getElementById('university2-name').innerHTML = content.university2_name;
+        document.getElementById('university2-degrees').innerHTML = content.university2_degrees;
         document.getElementById('university2-description').innerHTML = content.university2_description;
-        document.getElementById('university3-name').innerText = content.university3_name;
-        document.getElementById('university3-degrees').innerText = content.university3_degrees;
+        document.getElementById('university3-name').innerHTML = content.university3_name;
+        document.getElementById('university3-degrees').innerHTML = content.university3_degrees;
         document.getElementById('university3-description').innerHTML = content.university3_description;
-        document.getElementById('university4-name').innerText = content.university4_name;
-        document.getElementById('university4-degrees').innerText = content.university4_degrees;
+        document.getElementById('university4-name').innerHTML = content.university4_name;
+        document.getElementById('university4-degrees').innerHTML = content.university4_degrees;
         document.getElementById('university4-description').innerHTML = content.university4_description;
-        document.getElementById('testimonial1-quote').innerText = content.testimonial1_quote;
-        document.getElementById('testimonial1-name').innerText = content.testimonial1_name;
+        document.getElementById('testimonial1-quote').innerHTML = content.testimonial1_quote;
+        document.getElementById('testimonial1-name').innerHTML = content.testimonial1_name;
         document.getElementById('news1-title').innerHTML = content.news1_title + ' <i class="fas fa-chevron-down"></i>';
         document.getElementById('news1-description').innerHTML = content.news1_description;
         document.getElementById('news2-title').innerHTML = content.news2_title + ' <i class="fas fa-chevron-down"></i>';
@@ -96,18 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('news3-title').innerHTML = content.news3_title + ' <i class="fas fa-chevron-down"></i>';
         document.getElementById('news3-description').innerHTML = content.news3_description;
         document.getElementById('scholarships-content').innerHTML = content.scholarships;
-        document.getElementById('visa-content').innerText = content.visa;
+        document.getElementById('visa-content').innerHTML = content.visa;
         const headline = document.getElementById('hero-headline');
         let textIndex = 0;
         function rotateText() {
-            headline.innerText = content.hero_texts[textIndex];
+            headline.innerHTML = content.hero_texts[textIndex];
             textIndex = (textIndex + 1) % content.hero_texts.length;
         }
         rotateText();
-        setInterval(rotateText, 5000);
+        setInterval(rotateText, 4000); // Faster rotation for dynamism
     }
 
-    // Hero carousel
+    // Hero carousel with smoother transition
     function initHeroCarousel() {
         const hero = document.querySelector('.hero');
         let imageIndex = 0;
@@ -120,17 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (hero) {
             switchImage();
-            setInterval(switchImage, 5000);
+            setInterval(switchImage, 4000); // Faster for engagement
         }
     }
 
-    // Initialize accordions
+    // Initialize accordions with animation
     function initAccordions() {
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 if (content) {
                     content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                    header.querySelector('i').classList.toggle('fa-chevron-up');
+                    header.querySelector('i').classList.toggle('fa-chevron-down');
                 }
             });
         });
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize hero carousel
     initHeroCarousel();
 
-    // Modals
+    // Modals with animation
     const modal = document.getElementById('modal');
     const univModal = document.getElementById('university-modal');
     if (modal && univModal) {
@@ -263,10 +265,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const nameEl = document.getElementById(`university${univ}-name`);
             const descEl = document.getElementById(`university${univ}-description`);
             if (nameEl && descEl) {
-                document.getElementById('univ-modal-name').innerText = nameEl.innerText;
+                document.getElementById('univ-modal-name').innerHTML = nameEl.innerHTML;
                 document.getElementById('univ-modal-description').innerHTML = descEl.innerHTML;
-                document.getElementById('univ-modal-admissions').innerText = data ? data[`university${univ}_admissions`] || fallbackContent[`university${univ}_admissions`] : fallbackContent[`university${univ}_admissions`];
+                document.getElementById('univ-modal-admissions').innerHTML = data ? data[`university${univ}_admissions`] || fallbackContent[`university${univ}_admissions`] : fallbackContent[`university${univ}_admissions`];
                 univModal.style.display = 'block';
+            }
+        });
+    });
+
+    // Enhanced accordion for widgets and panels
+    document.querySelectorAll('.animated-widget, .class-panel').forEach(panel => {
+        panel.addEventListener('click', () => {
+            const isActive = panel.classList.contains('active');
+            document.querySelectorAll('.animated-widget, .class-panel').forEach(p => {
+                p.classList.remove('active');
+                const content = p.nextElementSibling;
+                if (content && content.classList.contains('accordion-content')) {
+                    content.style.display = 'none';
+                }
+            });
+            if (!isActive) {
+                panel.classList.add('active');
+                const content = panel.nextElementSibling;
+                if (content && content.classList.contains('accordion-content')) {
+                    content.style.display = 'block';
+                }
             }
         });
     });

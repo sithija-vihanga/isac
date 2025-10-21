@@ -10,275 +10,274 @@
     <style>
         body { font-family: 'Roboto', sans-serif; background: linear-gradient(to bottom, #e9ecef, #d3d7db); display: block; }
         h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
-        .hero { position: relative; height: 500px; background-size: cover; background-image: url('resources/hero1.jpg'); }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
-        .hero-content { z-index: 1; }
-        .card { transition: transform 0.3s, box-shadow 0.3s; border-radius: 10px; }
-        .card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .accordion-header { cursor: pointer; background-color: #f0f4f8; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; transition: background-color 0.3s; }
-        .accordion-header:hover { background-color: #e2e8f0; }
-        .accordion-content { display: none; padding: 1rem; background-color: #f9fafb; border-radius: 8px; margin-bottom: 1rem; }
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; border-radius: 8px; width: 80%; max-width: 500px; }
-        .close { float: right; cursor: pointer; font-size: 1.5em; }
-        button { transition: all 0.3s; }
-        img { object-fit: cover; }
-        .dropdown:hover .dropdown-menu { display: block; }
-        .dropdown-menu { display: none; position: absolute; background: white; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; }
-        .dropdown-menu a { display: block; padding: 10px 20px; color: gray-700; }
-        .dropdown-menu a:hover { color: blue-600; background: #f1f1f1; }
-        section { padding: 3rem 1rem; }
-        .container { max-width: 1200px; }
-        #map iframe { width: 100%; height: 400px; border-radius: 8px; }
-        .error { color: red; font-size: 0.875rem; display: none; }
-        #form-feedback { transition: opacity 0.3s; }
-        .university-location { transition: transform 0.3s; }
-        .university-location:hover { transform: scale(1.05); }
-        .university-location:hover .subtext { display: block; }
-        .subtext { display: none; }
-        .animated-widget { animation: fadeIn 1s ease-in-out; background-color: #bfdbfe; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-weight: bold; cursor: pointer; }
-        .animated-widget:hover { background-color: #93c5fd; }
-        .animated-widget.active { background-color: #93c5fd; }
-        .animated-widget .accordion-content { display: none; }
+        .hero { position: relative; height: 600px; background-size: cover; background-image: url('resources/hero1.jpg'); transition: background-image 1s ease-in-out; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
+        .hero-content { z-index: 1; animation: fadeInUp 1.5s ease-out; }
+        .card { transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; border-radius: 12px; opacity: 0; animation: fadeIn 1s forwards; }
+        .card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .accordion-header { cursor: pointer; background-color: #f0f4f8; padding: 1.2rem; border-radius: 10px; margin-bottom: 0.6rem; transition: background-color 0.3s ease, transform 0.3s ease; }
+        .accordion-header:hover { background-color: #e2e8f0; transform: translateY(-2px); }
+        .accordion-content { display: none; padding: 1.2rem; background-color: #f9fafb; border-radius: 10px; margin-bottom: 1.2rem; animation: slideDown 0.5s ease; }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); animation: fadeIn 0.3s; }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 12px; width: 85%; max-width: 550px; animation: zoomIn 0.4s; }
+        .close { float: right; cursor: pointer; font-size: 1.8em; transition: color 0.3s; }
+        .close:hover { color: #ff0000; }
+        button { transition: all 0.3s ease; border-radius: 50px; }
+        button:hover { transform: scale(1.05); }
+        img { object-fit: cover; transition: transform 0.5s ease; }
+        img:hover { transform: scale(1.1); }
+        .dropdown:hover .dropdown-menu { display: block; opacity: 1; animation: fadeIn 0.3s; }
+        .dropdown-menu { display: none; position: absolute; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); z-index: 1; border-radius: 8px; }
+        .dropdown-menu a { display: block; padding: 12px 24px; color: #4a5568; transition: background 0.3s; }
+        .dropdown-menu a:hover { color: #4299e1; background: #f7fafc; }
+        section { padding: 4rem 1.5rem; opacity: 0; animation: fadeInSection 1.2s forwards; animation-delay: 0.2s; }
+        .container { max-width: 1300px; }
+        #map iframe { width: 100%; height: 450px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .error { color: #e53e3e; font-size: 0.9rem; display: none; animation: shake 0.3s; }
+        #form-feedback { transition: opacity 0.4s ease; }
+        .university-location { transition: transform 0.4s ease, box-shadow 0.4s ease; border-radius: 12px; overflow: hidden; }
+        .university-location:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .university-location:hover .subtext { display: block; opacity: 1; animation: fadeIn 0.3s; }
+        .subtext { display: none; opacity: 0; transition: opacity 0.3s; }
+        .animated-widget { animation: fadeInUp 1.2s ease-in-out; background-color: #bee3f8; padding: 1.2rem; border-radius: 10px; margin-bottom: 1.2rem; text-align: center; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
+        .animated-widget:hover { background-color: #90cdf4; transform: translateY(-3px); }
+        .animated-widget.active { background-color: #90cdf4; }
+        .animated-widget .accordion-content { display: none; animation: slideDown 0.5s; }
         .animated-widget.active .accordion-content { display: block; }
-        .class-panel { animation: fadeIn 1s ease-in-out; background-color: #bfdbfe; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-weight: bold; cursor: pointer; }
-        .class-panel:hover { background-color: #93c5fd; }
-        .class-panel.active { background-color: #93c5fd; }
-        .class-panel .accordion-content { display: none; }
+        .class-panel { animation: fadeInUp 1.2s ease-in-out; background-color: #bee3f8; padding: 1.2rem; border-radius: 10px; margin-bottom: 1.2rem; text-align: center; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
+        .class-panel:hover { background-color: #90cdf4; transform: translateY(-3px); }
+        .class-panel.active { background-color: #90cdf4; }
+        .class-panel .accordion-content { display: none; animation: slideDown 0.5s; }
         .class-panel.active .accordion-content { display: block; }
-        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInSection { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { 0% { opacity: 0; height: 0; } 100% { opacity: 1; height: auto; } }
+        @keyframes zoomIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         @media (max-width: 768px) {
-            .hero { height: 400px; }
-            .hero-content { padding: 1rem; }
-            .hero-content h2 { font-size: 2rem; }
-            #map iframe { height: 300px; }
+            .hero { height: 450px; }
+            .hero-content { padding: 1.5rem; }
+            .hero-content h2 { font-size: 2.5rem; }
+            #map iframe { height: 350px; }
             .map-section { flex-direction: column; }
-            .university-location { padding: 1rem; }
-            .university-location:hover .subtext { display: block; }
+            .university-location { padding: 1.2rem; }
             .exam-prep-container { flex-direction: column; }
             .classes-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header class="sticky top-0 bg-white shadow-md z-10">
-        <nav class="container mx-auto py-4 flex justify-between items-center">
-            <h1><a href="#home" class="text-2xl font-bold text-blue-600">IUA</a> <span class="text-2xl text-gray-500 font-semibold tracking-tight">|</span> 
-                 <span class="text-xl text-gray-500 font-semibold tracking-tight"> International University Admissions</span>
+    <header class="sticky top-0 bg-white shadow-lg z-10 transition-shadow duration-300">
+        <nav class="container mx-auto py-5 flex justify-between items-center">
+            <h1><a href="#home" class="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors">IUA</a> <span class="text-3xl text-gray-500 font-semibold tracking-tight">|</span> 
+                 <span class="text-2xl text-gray-500 font-semibold tracking-tight"> International University Admissions</span>
             </h1>
-            <ul class="flex space-x-6 items-center">
-                <li><a href="#home" class="text-gray-700 hover:text-blue-600">Home</a></li>
+            <ul class="flex space-x-8 items-center">
+                <li><a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a></li>
                 <li class="relative dropdown">
-                    <a href="#about" class="text-gray-700 hover:text-blue-600">About <i class="fas fa-chevron-down"></i></a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">About <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
                         <a href="#about" class="text-gray-700 hover:text-blue-600">About IUA</a>
                         <a href="#why-italy" class="text-gray-700 hover:text-blue-600">Why Italy</a>
                     </div>
                 </li>
-                <li><a href="#universities" class="text-gray-700 hover:text-blue-600">Universities</a></li>
-                <li><a href="#scholarships" class="text-gray-700 hover:text-blue-600">Scholarships</a></li>
+                <li><a href="#universities" class="text-gray-700 hover:text-blue-600 transition-colors">Universities</a></li>
+                <li><a href="#scholarships" class="text-gray-700 hover:text-blue-600 transition-colors">Scholarships</a></li>
                 <li class="relative dropdown">
-                    <a href="#resources" class="text-gray-700 hover:text-blue-600">Resources <i class="fas fa-chevron-down"></i></a>
+                    <a href="#resources" class="text-gray-700 hover:text-blue-600 transition-colors">Resources <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu">
                         <a href="#visa" class="text-gray-700 hover:text-blue-600">Visa</a>
                         <a href="#tolc" class="text-gray-700 hover:text-blue-600">Entrance Exam Prep</a>
                     </div>
                 </li>
-                <li><a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a></li>
-                <li><a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a></li>
+                <li><a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a></li>
+                <li><a href="register.html" class="bg-blue-600 text-white px-5 py-2.5 rounded-full hover:bg-blue-700 transition-all">Register</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero flex items-center justify-center text-white text-center">
-        <div class="hero-content bg-black bg-opacity-50 p-8 rounded">
-            <h2 id="hero-headline">Welcome to IUA - Study Engineering in Italy</h2>
-            <p class="mt-4">Your gateway to top engineering programs in Italy's prestigious universities.</p>
-            <button id="get-started-btn" class="mt-6 bg-gradient-to-r from-blue-600 to-green-600 text-white px-6 py-2 rounded hover:opacity-90">Get Started</button>
+        <div class="hero-content bg-black bg-opacity-60 p-10 rounded-lg shadow-xl">
+            <h2 id="hero-headline" class="text-4xl md:text-5xl font-bold mb-4">Welcome to IUA - Study Engineering in Italy</h2>
+            <p class="mt-4 text-lg md:text-xl">Your gateway to top engineering programs in Italy's prestigious universities.</p>
+            <button id="get-started-btn" class="mt-6 bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-full hover:opacity-90 shadow-md">Get Started</button>
         </div>
     </section>
 
     <section id="about" class="container mx-auto py-12">
-        <h2 class="text-3xl font-bold text-center mb-8">About IUA</h2>
-        <p id="about-content" class="text-lg text-gray-700 max-w-3xl mx-auto">IUA helps students secure admissions to top Italian universities for engineering programs.</p>
+        <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">About IUA</h2>
+        <p id="about-content" class="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">IUA helps students secure admissions to top Italian universities for engineering programs.</p>
     </section>
 
     <section id="why-italy" class="bg-white py-12">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Why Choose Italy for Engineering Studies?</h2>
-            <p id="why-italy-content" class="text-center mb-8 text-gray-700 max-w-3xl mx-auto">Study engineering in Italy with affordable fees and English-taught programs.</p>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-globe-europe text-blue-600 text-2xl mb-2"></i><h3 class="font-bold">Study in English</h3><p>Engineering degrees fully in English.</p></div>
-                <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-check-circle text-green-600 text-2xl mb-2"></i><h3 class="font-bold">Stress-Free Admissions</h3><p>Guided application and exam prep.</p></div>
-                <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-euro-sign text-blue-600 text-2xl mb-2"></i><h3 class="font-bold">Affordable Education</h3><p>Low tuition fees for engineering.</p></div>
-                <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-award text-green-600 text-2xl mb-2"></i><h3 class="font-bold">Scholarships</h3><p>Engineering-specific opportunities.</p></div>
+            <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Why Choose Italy for Engineering Studies?</h2>
+            <p id="why-italy-content" class="text-center mb-10 text-gray-700 text-lg max-w-4xl mx-auto leading-relaxed">Study engineering in Italy with affordable fees and English-taught programs.</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card"><i class="fas fa-globe-europe text-blue-600 text-3xl mb-4"></i><h3 class="font-bold text-xl mb-2">Study in English</h3><p class="text-gray-600">Engineering degrees fully in English.</p></div>
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card"><i class="fas fa-check-circle text-green-600 text-3xl mb-4"></i><h3 class="font-bold text-xl mb-2">Stress-Free Admissions</h3><p class="text-gray-600">Guided application and exam prep.</p></div>
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card"><i class="fas fa-euro-sign text-blue-600 text-3xl mb-4"></i><h3 class="font-bold text-xl mb-2">Affordable Education</h3><p class="text-gray-600">Low tuition fees for engineering.</p></div>
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card"><i class="fas fa-award text-green-600 text-3xl mb-4"></i><h3 class="font-bold text-xl mb-2">Scholarships</h3><p class="text-gray-600">Engineering-specific opportunities.</p></div>
             </div>
         </div>
     </section>
 
     <section id="universities" class="container mx-auto py-12 bg-gray-100">
-        <h2 class="text-3xl font-bold text-center mb-8">Featured Engineering Universities</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div class="university-card p-6 bg-white rounded shadow card cursor-pointer" data-univ="1">
-                <img src="resources/bologna.jpg" alt="University of Bologna" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 id="university1-name" class="font-bold text-xl">University of Bologna</h3>
-                <p><strong>Degree:</strong> <span id="university1-degrees">Civil and Environmental Engineering</span></p>
-                <div id="university1-description" class="text-gray-700">World's oldest university with excellent engineering programs.</div>
+        <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Featured Engineering Universities</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div class="university-card p-6 bg-white rounded-lg shadow-md card cursor-pointer" data-univ="1">
+                <img src="resources/bologna.jpg" alt="University of Bologna" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h3 id="university1-name" class="font-bold text-xl mb-2">University of Bologna</h3>
+                <p id="university1-degrees" class="text-gray-600 mb-4">Civil and Environmental Engineering</p>
+                <p id="university1-description" class="text-gray-700">World's oldest university with excellent engineering programs.</p>
             </div>
-            <div class="university-card p-6 bg-white rounded shadow card cursor-pointer" data-univ="2">
-                <img src="resources/napoli.jpg" alt="University of Napoli Federico II" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 id="university2-name" class="font-bold text-xl">University of Napoli Federico II</h3>
-                <p><strong>Degree:</strong> <span id="university2-degrees">Applied Computer Science and AI</span></p>
-                <div id="university2-description" class="text-gray-700">Leading AI and computer science programs in Naples.</div>
+            <div class="university-card p-6 bg-white rounded-lg shadow-md card cursor-pointer" data-univ="2">
+                <img src="resources/napoli.jpg" alt="University of Napoli Federico II" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h3 id="university2-name" class="font-bold text-xl mb-2">University of Napoli Federico II</h3>
+                <p id="university2-degrees" class="text-gray-600 mb-4">Applied Computer Science and AI</p>
+                <p id="university2-description" class="text-gray-700">Leading AI and computer science programs in Naples.</p>
             </div>
-            <div class="university-card p-6 bg-white rounded shadow card cursor-pointer" data-univ="3">
-                <img src="resources/sapienza.jpg" alt="University of La Sapienza" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 id="university3-name" class="font-bold text-xl">University of La Sapienza</h3>
-                <p><strong>Degree:</strong> <span id="university3-degrees">Artificial Intelligence</span></p>
-                <div id="university3-description" class="text-gray-700">Top-tier AI programs in historic Rome.</div>
+            <div class="university-card p-6 bg-white rounded-lg shadow-md card cursor-pointer" data-univ="3">
+                <img src="resources/sapienza.jpg" alt="University of La Sapienza, Rome" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h3 id="university3-name" class="font-bold text-xl mb-2">University of La Sapienza, Rome</h3>
+                <p id="university3-degrees" class="text-gray-600 mb-4">Artificial Intelligence</p>
+                <p id="university3-description" class="text-gray-700">Top-tier AI programs in historic Rome.</p>
             </div>
-            <div class="university-card p-6 bg-white rounded shadow card cursor-pointer" data-univ="4">
-                <img src="resources/pavia.jpg" alt="University of Pavia" class="w-full h-48 object-cover mb-4 rounded">
-                <h3 id="university4-name" class="font-bold text-xl">University of Pavia</h3>
-                <p><strong>Degree:</strong> <span id="university4-degrees">Building Construction Engineering</span></p>
-                <div id="university4-description" class="text-gray-700">Focus on practical engineering in a student-friendly city.</div>
+            <div class="university-card p-6 bg-white rounded-lg shadow-md card cursor-pointer" data-univ="4">
+                <img src="resources/pavia.jpg" alt="University of Pavia" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h3 id="university4-name" class="font-bold text-xl mb-2">University of Pavia</h3>
+                <p id="university4-degrees" class="text-gray-600 mb-4">Building Construction Engineering</p>
+                <p id="university4-description" class="text-gray-700">Focus on practical engineering in a student-friendly city.</p>
             </div>
         </div>
-        <div id="map" class="flex flex-col md:flex-row gap-6 map-section">
-            <div class="w-full md:w-1/2 grid grid-cols-1 gap-6">
-                <div class="p-6 bg-white rounded shadow university-location">
-                    <h3 class="font-bold text-xl">University of Bologna</h3>
-                    <p class="text-gray-700">Location: Bologna, Italy. Known for its historic significance and engineering excellence.</p>
-                    <div class="subtext text-gray-600 mt-2">State-of-the-art laboratories and vibrant student community.</div>
-                </div>
-                <div class="p-6 bg-white rounded shadow university-location">
-                    <h3 class="font-bold text-xl">University of Napoli Federico II</h3>
-                    <p class="text-gray-700">Location: Naples, Italy. Focuses on AI and computer science.</p>
-                    <div class="subtext text-gray-600 mt-2">Cutting-edge AI research and industry connections.</div>
-                </div>
-                <div class="p-6 bg-white rounded shadow university-location">
-                    <h3 class="font-bold text-xl">Sapienza University of Rome</h3>
-                    <p class="text-gray-700">Location: Rome, Italy. Largest university with top AI programs.</p>
-                    <div class="subtext text-gray-600 mt-2">Leading AI research centers in a historic city.</div>
-                </div>
-                <div class="p-6 bg-white rounded shadow university-location">
-                    <h3 class="font-bold text-xl">University of Pavia</h3>
-                    <p class="text-gray-700">Location: Pavia, Italy. Specializes in building engineering.</p>
-                    <div class="subtext text-gray-600 mt-2">Practical engineering projects in a charming city.</div>
-                </div>
+        <h3 class="text-3xl font-bold text-center mb-8 animate-fadeInUp">University Locations</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 map-section">
+            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
+                <img src="resources/bologna-map.jpg" alt="Bologna Map" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <h4 class="font-bold mb-2">Bologna</h4>
+                <p class="subtext text-gray-600">Vibrant student city with historic charm.</p>
+            </div>
+            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
+                <img src="resources/naples-map.jpg" alt="Naples Map" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <h4 class="font-bold mb-2">Naples</h4>
+                <p class="subtext text-gray-600">Dynamic coastal city with rich culture.</p>
+            </div>
+            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
+                <img src="resources/rome-map.jpg" alt="Rome Map" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <h4 class="font-bold mb-2">Rome</h4>
+                <p class="subtext text-gray-600">Eternal city blending history and innovation.</p>
+            </div>
+            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
+                <img src="resources/pavia-map.jpg" alt="Pavia Map" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <h4 class="font-bold mb-2">Pavia</h4>
+                <p class="subtext text-gray-600">Charming town with a focus on academics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="scholarships" class="bg-white py-12">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Scholarships</h2>
+            <p id="scholarships-content" class="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">Explore scholarships for engineering students in Italy.</p>
+        </div>
+    </section>
+
+    <section id="tolc" class="container mx-auto py-12 bg-gray-100">
+        <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Entrance Exam Prep - TOLC-I</h2>
+        <p id="tolc-description" class="text-lg text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">Prepare for the TOLC-I entrance exam for engineering programs in Italy. It consists of 50 MCQ questions over 1 hour and 50 minutes, available online at home for €39.</p>
+        <div class="flex flex-col md:flex-row gap-8 exam-prep-container max-w-4xl mx-auto">
+            <div class="w-full md:w-1/2 flex flex-col gap-6">
+                <div class="animated-widget accordion-header"><i class="fas fa-clock text-blue-600 mr-2"></i>Timed Exam</div>
+                <div class="accordion-content text-gray-700">The exam is timed to simulate real conditions, helping you manage time effectively.</div>
+                <div class="animated-widget accordion-header"><i class="fas fa-question-circle text-blue-600 mr-2"></i>Multiple Choice</div>
+                <div class="accordion-content text-gray-700">50 multiple-choice questions covering key engineering topics.</div>
+                <div class="animated-widget accordion-header"><i class="fas fa-laptop text-blue-600 mr-2"></i>Online at Home</div>
+                <div class="accordion-content text-gray-700">Take the exam online from home for only €39, making it accessible and affordable.</div>
             </div>
             <div class="w-full md:w-1/2">
-                <h2 class="text-3xl font-bold text-center mb-8">University Locations</h2>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d5916752.239999999!2d10.5!3d42.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sUniversity%20of%20Bologna%2C%20University%20of%20Napoli%20Federico%20II%2C%20Sapienza%20University%20of%20Rome%2C%20University%20of%20Pavia!5e0!3m2!1sen!2sus!4v1729520000000" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <img src="resources/classroom.jpg" alt="Entrance Exam Prep Classroom" class="w-full rounded-lg shadow-lg">
             </div>
         </div>
-    </section>
-
-    <section id="scholarships" class="container mx-auto py-12 bg-white">
-        <h2 class="text-3xl font-bold text-center mb-8">Scholarship Details</h2>
-        <p id="scholarships-content" class="text-lg text-gray-700 max-w-3xl mx-auto mb-8">Explore scholarships for engineering students in Italy.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-award text-green-600 text-2xl mb-2"></i><h3 class="font-bold">Scholarships up to €6000/year</h3><p>Merit-based scholarships covering living expenses and tuition for outstanding students in engineering programs.</p></div>
-            <div class="p-6 bg-gray-50 rounded shadow card"><i class="fas fa-euro-sign text-blue-600 text-2xl mb-2"></i><h3 class="font-bold">Course Fee Waivers up to €156/year</h3><p>Income-based waivers reducing tuition fees to as low as €156/year for eligible international students.</p></div>
+        <h3 class="text-3xl font-bold mb-6 mt-10 animate-fadeInUp">Classes Conducted</h3>
+        <p id="classes-description" class="text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">Join our interactive classes for TOLC-I preparation.</p>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-4xl mx-auto classes-container">
+            <div class="class-panel"><i class="fas fa-laptop-code text-blue-600 mr-2"></i>Online Quizzes</div>
+            <div class="accordion-content text-gray-700">Interactive quizzes to test your knowledge.</div>
+            <div class="class-panel"><i class="fas fa-video text-blue-600 mr-2"></i>Live Sessions</div>
+            <div class="accordion-content text-gray-700">Live and recorded sessions with expert tutors.</div>
+            <div class="class-panel"><i class="fas fa-question text-blue-600 mr-2"></i>Revision Q&A</div>
+            <div class="accordion-content text-gray-700">Live Q&A sessions for quick revision.</div>
+            <div class="class-panel"><i class="fas fa-file-alt text-blue-600 mr-2"></i>Mock Tests</div>
+            <div class="accordion-content text-gray-700">Full-length practice exams simulating TOLC-I.</div>
+            <div class="class-panel"><i class="fas fa-book text-blue-600 mr-2"></i>Sample Papers</div>
+            <div class="accordion-content text-gray-700">Previous years' question papers for practice.</div>
         </div>
-    </section>
-
-    <section id="tolc" class="bg-white py-12">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Entrance Exam Prep</h2>
-            <div class="flex flex-col md:flex-row gap-6 max-w-3xl mx-auto exam-prep-container mb-8">
-                <div class="w-full md:w-1/2 grid grid-cols-1 gap-4">
-                    <div class="animated-widget accordion-header"><i class="fas fa-question-circle text-blue-600 mr-2"></i>50 MCQ Questions</div>
-                    <div class="accordion-content text-gray-700">The TOLC-I exam consists of 50 multiple-choice questions covering logic, mathematics, physics, and chemistry.</div>
-                    <div class="animated-widget accordion-header"><i class="fas fa-clock text-blue-600 mr-2"></i>1 Hour and 50 Minutes</div>
-                    <div class="accordion-content text-gray-700">The exam duration is 1 hour and 50 minutes, allowing time for careful answering.</div>
-                    <div class="animated-widget accordion-header"><i class="fas fa-euro-sign text-blue-600 mr-2"></i>Do Online at Home - €39</div>
-                    <div class="accordion-content text-gray-700">Take the exam online from home for only €39, making it accessible and affordable.</div>
-                </div>
-                <div class="w-full md:w-1/2">
-                    <img src="resources/classroom.jpg" alt="Entrance Exam Prep Classroom" class="w-full rounded shadow">
-                </div>
-            </div>
-            <h3 class="text-2xl font-bold mb-4">Classes Conducted</h3>
-            <p id="classes-description" class="text-gray-700 mb-4 max-w-3xl mx-auto">Join our interactive classes for TOLC-I preparation.</p>
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-3xl mx-auto classes-container">
-                <div class="class-panel accordion-header"><i class="fas fa-laptop-code text-blue-600 mr-2"></i>Online Quizzes</div>
-                <div class="accordion-content text-gray-700">Interactive quizzes to test your knowledge.</div>
-                <div class="class-panel accordion-header"><i class="fas fa-video text-blue-600 mr-2"></i>Live Sessions</div>
-                <div class="accordion-content text-gray-700">Live and recorded sessions with expert tutors.</div>
-                <div class="class-panel accordion-header"><i class="fas fa-question text-blue-600 mr-2"></i>Revision Q&A</div>
-                <div class="accordion-content text-gray-700">Live Q&A sessions for quick revision.</div>
-                <div class="class-panel accordion-header"><i class="fas fa-file-alt text-blue-600 mr-2"></i>Mock Tests</div>
-                <div class="accordion-content text-gray-700">Full-length practice exams simulating TOLC-I.</div>
-                <div class="class-panel accordion-header"><i class="fas fa-book text-blue-600 mr-2"></i>Sample Papers</div>
-                <div class="accordion-content text-gray-700">Previous years' question papers for practice.</div>
-            </div>
-            <h3 class="text-2xl font-bold mb-4 mt-8">Duration</h3>
-            <p id="duration" class="text-gray-700 mb-4 max-w-3xl mx-auto">4 months (flexible start dates).</p>
-            <h3 class="accordion-header text-2xl font-bold mb-4 flex justify-between cursor-pointer">Syllabus <i class="fas fa-chevron-down"></i></h3>
-            <ul id="syllabus-list" class="accordion-content text-gray-700 list-disc pl-6 max-w-3xl mx-auto">
-                <li>Logic</li>
-                <li>Mathematics</li>
-                <li>Physics</li>
-                <li>Chemistry</li>
-                <li>General Knowledge</li>
-            </ul>
-            <button id="enroll-btn" class="mt-6 bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-2 rounded hover:opacity-90">Enroll Now</button>
-        </div>
+        <h3 class="text-3xl font-bold mb-6 mt-10 animate-fadeInUp">Duration</h3>
+        <p id="duration" class="text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">4 months (flexible start dates).</p>
+        <h3 class="accordion-header text-3xl font-bold mb-6 flex justify-between cursor-pointer animate-fadeInUp">Syllabus <i class="fas fa-chevron-down"></i></h3>
+        <ul id="syllabus-list" class="accordion-content text-gray-700 list-disc pl-8 max-w-4xl mx-auto leading-relaxed">
+            <li>Logic</li>
+            <li>Mathematics</li>
+            <li>Physics</li>
+            <li>Chemistry</li>
+            <li>General Knowledge</li>
+        </ul>
+        <button id="enroll-btn" class="mt-8 bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-full hover:opacity-90 shadow-md">Enroll Now</button>
     </section>
 
     <section id="visa" class="bg-gray-100 py-12">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Visa Details and Documents</h2>
-            <p id="visa-content" class="text-lg text-gray-700 max-w-3xl mx-auto">Learn about visa requirements for studying in Italy.</p>
+            <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Visa Details and Documents</h2>
+            <p id="visa-content" class="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">Learn about visa requirements for studying in Italy.</p>
         </div>
     </section>
 
     <section id="testimonials" class="container mx-auto py-12 bg-gray-100">
-        <h2 class="text-3xl font-bold text-center mb-8">Student Testimonials</h2>
-        <div class="flex justify-center items-center p-6 bg-white rounded shadow card mx-auto max-w-5xl">
-            <img src="resources/student1.jpg" alt="Student 1" class="w-48 h-48 rounded-full mr-8">
+        <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Student Testimonials</h2>
+        <div class="flex justify-center items-center p-8 bg-white rounded-lg shadow-md card mx-auto max-w-6xl">
+            <img src="resources/student1.jpg" alt="Student 1" class="w-56 h-56 rounded-full mr-10 shadow-md">
             <div class="text-center">
-                <p id="testimonial1-quote" class="italic text-gray-700 mb-2">IUA helped me get into my dream university!</p>
-                <p id="testimonial1-name" class="font-bold">John Doe, Student</p>
+                <p id="testimonial1-quote" class="italic text-gray-700 text-lg mb-3">IUA helped me get into my dream university!</p>
+                <p id="testimonial1-name" class="font-bold text-xl">John Doe, Student</p>
             </div>
         </div>
     </section>
 
     <section id="news" class="bg-white py-12">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Latest News</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 bg-gray-50 rounded shadow card">
-                    <i class="fas fa-newspaper text-blue-600 text-2xl mb-2"></i>
-                    <h3 class="accordion-header font-bold text-xl mb-2 flex justify-between cursor-pointer" id="news1-title">IUA News <i class="fas fa-chevron-down"></i></h3>
-                    <div id="news1-description" class="accordion-content text-gray-700">Latest updates from IUA.</div>
+            <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Latest News</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card">
+                    <i class="fas fa-newspaper text-blue-600 text-3xl mb-4"></i>
+                    <h3 class="accordion-header font-bold text-xl mb-3 flex justify-between cursor-pointer" id="news1-title">IUA News <i class="fas fa-chevron-down"></i></h3>
+                    <div id="news1-description" class="accordion-content text-gray-700 leading-relaxed">Latest updates from IUA.</div>
                 </div>
-                <div class="p-6 bg-gray-50 rounded shadow card">
-                    <i class="fas fa-newspaper text-blue-600 text-2xl mb-2"></i>
-                    <h3 class="accordion-header font-bold text-xl mb-2 flex justify-between cursor-pointer" id="news2-title">IUA Events <i class="fas fa-chevron-down"></i></h3>
-                    <div id="news2-description" class="accordion-content text-gray-700">Recent events hosted by IUA.</div>
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card">
+                    <i class="fas fa-newspaper text-blue-600 text-3xl mb-4"></i>
+                    <h3 class="accordion-header font-bold text-xl mb-3 flex justify-between cursor-pointer" id="news2-title">IUA Events <i class="fas fa-chevron-down"></i></h3>
+                    <div id="news2-description" class="accordion-content text-gray-700 leading-relaxed">Recent events hosted by IUA.</div>
                 </div>
-                <div class="p-6 bg-gray-50 rounded shadow card">
-                    <i class="fas fa-newspaper text-blue-600 text-2xl mb-2"></i>
-                    <h3 class="accordion-header font-bold text-xl mb-2 flex justify-between cursor-pointer" id="news3-title">IUA Partnerships <i class="fas fa-chevron-down"></i></h3>
-                    <div id="news3-description" class="accordion-content text-gray-700">New collaborations with universities.</div>
+                <div class="p-8 bg-gray-50 rounded-lg shadow-md card">
+                    <i class="fas fa-newspaper text-blue-600 text-3xl mb-4"></i>
+                    <h3 class="accordion-header font-bold text-xl mb-3 flex justify-between cursor-pointer" id="news3-title">IUA Partnerships <i class="fas fa-chevron-down"></i></h3>
+                    <div id="news3-description" class="accordion-content text-gray-700 leading-relaxed">New collaborations with universities.</div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="container mx-auto py-12 bg-gray-100">
-        <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
-        <div class="text-center text-lg text-gray-700 max-w-3xl mx-auto">
-            <p><i class="fas fa-envelope text-blue-600 mr-2"></i>Email: <a href="mailto:info@iua.edu" class="text-blue-600 hover:underline">info@iua.edu</a></p>
-            <p><i class="fas fa-phone text-blue-600 mr-2"></i>Phone: <a href="tel:+390123456789" class="text-blue-600 hover:underline">+39 012 345 6789</a></p>
-            <p><i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>Address: Via dell'Università 123, 00100 Rome, Italy</p>
-            <p class="mt-4">Reach out to us for any inquiries about engineering programs, admissions, or scholarships. We're here to help you start your journey!</p>
+        <h2 class="text-4xl font-bold text-center mb-10 animate-fadeInUp">Contact Us</h2>
+        <div class="text-center text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            <p class="mb-4"><i class="fas fa-envelope text-blue-600 mr-3 text-2xl"></i>Email: <a href="mailto:info@iua.edu" class="text-blue-600 hover:underline">info@iua.edu</a></p>
+            <p class="mb-4"><i class="fas fa-phone text-blue-600 mr-3 text-2xl"></i>Phone: <a href="tel:+390123456789" class="text-blue-600 hover:underline">+39 012 345 6789</a></p>
+            <p class="mb-4"><i class="fas fa-map-marker-alt text-blue-600 mr-3 text-2xl"></i>Address: Via dell'Università 123, 00100 Rome, Italy</p>
+            <p class="mt-6">Reach out to us for any inquiries about engineering programs, admissions, or scholarships. We're here to help you start your journey!</p>
         </div>
     </section>
 
-    <footer class="bg-blue-600 text-white py-6 text-center">
+    <footer class="bg-blue-600 text-white py-8 text-center shadow-inner">
         <p>&copy; 2025 IUA. All rights reserved.</p>
     </footer>
 
@@ -286,17 +285,17 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Contact IUA to Get Started</h2>
+            <h2 class="text-2xl font-bold mb-6">Contact IUA to Get Started</h2>
             <form id="contact-form" action="https://formbold.com/s/9BqEY" method="POST">
-                <input type="text" name="name" placeholder="Name" class="w-full p-2 mb-2 border rounded" required>
+                <input type="text" name="name" placeholder="Name" class="w-full p-3 mb-3 border rounded-lg" required>
                 <p class="error" id="name-error" data-original="Please enter your name.">Please enter your name.</p>
-                <input type="email" name="email" placeholder="Email" class="w-full p-2 mb-2 border rounded" required>
+                <input type="email" name="email" placeholder="Email" class="w-full p-3 mb-3 border rounded-lg" required>
                 <p class="error" id="email-error" data-original="Please enter a valid email address.">Please enter a valid email address.</p>
-                <textarea name="message" placeholder="Message" class="w-full p-2 mb-2 border rounded" rows="4"></textarea>
+                <textarea name="message" placeholder="Message" class="w-full p-3 mb-3 border rounded-lg" rows="4"></textarea>
                 <input type="hidden" name="_subject" value="IUA Get Started Form Submission">
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 w-full">Submit</button>
             </form>
-            <div id="form-feedback" class="mt-4 p-4 rounded text-center hidden"></div>
+            <div id="form-feedback" class="mt-6 p-5 rounded text-center hidden"></div>
         </div>
     </div>
 
@@ -304,35 +303,13 @@
     <div id="university-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2 id="univ-modal-name">University Details</h2>
-            <div id="univ-modal-description">Loading university details...</div>
-            <h3>Admissions</h3>
-            <p id="univ-modal-admissions">Loading admissions info...</p>
+            <h2 id="univ-modal-name" class="text-2xl font-bold mb-6">University Details</h2>
+            <div id="univ-modal-description" class="text-gray-700 mb-6">Loading university details...</div>
+            <h3 class="text-xl font-bold mb-3">Admissions</h3>
+            <p id="univ-modal-admissions" class="text-gray-700">Loading admissions info...</p>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // Initialize accordion functionality for animated widgets and class panels
-        document.querySelectorAll('.animated-widget, .class-panel').forEach(panel => {
-            panel.addEventListener('click', () => {
-                const isActive = panel.classList.contains('active');
-                document.querySelectorAll('.animated-widget, .class-panel').forEach(p => {
-                    p.classList.remove('active');
-                    const content = p.nextElementSibling;
-                    if (content && content.classList.contains('accordion-content')) {
-                        content.style.display = 'none';
-                    }
-                });
-                if (!isActive) {
-                    panel.classList.add('active');
-                    const content = panel.nextElementSibling;
-                    if (content && content.classList.contains('accordion-content')) {
-                        content.style.display = 'block';
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
