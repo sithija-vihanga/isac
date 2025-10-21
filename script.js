@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         about: "IUA helps students secure admissions to top Italian universities for engineering programs.",
         whyItaly: "Study engineering in Italy with affordable fees and English-taught programs.<h4>Cultural Immersion</h4><ul><li>Experience Italy's rich culture</li></ul>",
         tolc_description: "Prepare for the TOLC-I entrance exam for engineering programs in Italy. It consists of 50 MCQ questions over 1 hour and 50 minutes, available online at home for €39.<h4>Exam Format</h4><ul><li>Multiple-choice questions</li></ul>",
-        classes_description: "Join our interactive classes for TOLC-I preparation.<div class='flex flex-col gap-4 mt-4'><div class='accordion-header cursor-pointer bg-blue-100 hover:bg-blue-200 p-4 rounded shadow text-gray-700'>Online Quizzes <i class='fas fa-chevron-down'></i></div><div class='accordion-content text-gray-700'>Interactive quizzes to test your knowledge.</div><div class='accordion-header cursor-pointer bg-blue-100 hover:bg-blue-200 p-4 rounded shadow text-gray-700'>Mock Tests <i class='fas fa-chevron-down'></i></div><div class='accordion-content text-gray-700'>Full-length practice exams simulating TOLC-I.</div><div class='accordion-header cursor-pointer bg-blue-100 hover:bg-blue-200 p-4 rounded shadow text-gray-700'>Sample Papers <i class='fas fa-chevron-down'></i></div><div class='accordion-content text-gray-700'>Previous years' question papers for practice.</div><div class='accordion-header cursor-pointer bg-blue-100 hover:bg-blue-200 p-4 rounded shadow text-gray-700'>Revision Q&A <i class='fas fa-chevron-down'></i></div><div class='accordion-content text-gray-700'>Live Q&A sessions for quick revision.</div><div class='accordion-header cursor-pointer bg-blue-100 hover:bg-blue-200 p-4 rounded shadow text-gray-700'>Online Classes <i class='fas fa-chevron-down'></i></div><div class='accordion-content text-gray-700'>Live and recorded sessions with expert tutors.</div></div>",
+        classes_description: "Join our interactive classes for TOLC-I preparation.",
         duration: "4 months (flexible start dates)",
         syllabus_items: ["Logic", "Mathematics", "Physics", "Chemistry", "General Knowledge"],
         university1_name: "University of Bologna",
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply content (real or fallback)
     function applyContent(content) {
         console.log('Applying content:', Object.keys(content));
-        document.getElementById('about-content').innerHTML = content.about; // Changed to innerHTML for richer content
+        document.getElementById('about-content').innerHTML = content.about;
         document.getElementById('why-italy-content').innerHTML = content.whyItaly;
         document.getElementById('tolc-description').innerHTML = content.tolc_description;
         document.getElementById('classes-description').innerHTML = content.classes_description;
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             textIndex = (textIndex + 1) % content.hero_texts.length;
         }
         rotateText();
-        setInterval(rotateText, 4000); // Faster rotation for dynamism
+        setInterval(rotateText, 4000);
     }
 
     // Hero carousel with smoother transition
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (hero) {
             switchImage();
-            setInterval(switchImage, 4000); // Faster for engagement
+            setInterval(switchImage, 4000);
         }
     }
 
@@ -273,24 +273,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Enhanced accordion for widgets and panels
-    document.querySelectorAll('.animated-widget, .class-panel').forEach(panel => {
-        panel.addEventListener('click', () => {
-            const isActive = panel.classList.contains('active');
-            document.querySelectorAll('.animated-widget, .class-panel').forEach(p => {
-                p.classList.remove('active');
-                const content = p.nextElementSibling;
-                if (content && content.classList.contains('accordion-content')) {
-                    content.style.display = 'none';
-                }
-            });
-            if (!isActive) {
-                panel.classList.add('active');
-                const content = panel.nextElementSibling;
-                if (content && content.classList.contains('accordion-content')) {
-                    content.style.display = 'block';
-                }
+    // Hover for animated widgets only (class panels no longer have dropdowns)
+    document.querySelectorAll('.animated-widget').forEach(panel => {
+        panel.addEventListener('mouseenter', () => {
+            const content = panel.nextElementSibling;
+            if (content && content.classList.contains('accordion-content')) {
+                content.style.display = 'block';
+            }
+        });
+        panel.addEventListener('mouseleave', () => {
+            const content = panel.nextElementSibling;
+            if (content && content.classList.contains('accordion-content')) {
+                content.style.display = 'none';
             }
         });
     });
+
+    // Initialize Leaflet Map
+    try {
+        const map = L.map('map').setView([42, 12], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        const locations = [
+            { lat: 44.49381, lng: 11.33875, title: "Bologna", description: "Vibrant student city with historic charm." },
+            { lat: 40.84773, lng: 14.25662, title: "Naples", description: "Dynamic coastal city with rich culture." },
+            { lat: 41.9033, lng: 12.5158, title: "Rome", description: "Eternal city blending history and innovation." },
+            { lat: 45.1867, lng: 9.1565, title: "Pavia", description: "Charming town with a focus on academics." }
+        ];
+
+        locations.forEach(location => {
+            const marker = L.marker([location.lat, location.lng]).addTo(map);
+            marker.bindPopup(`<b>${location.title}</b><br>${location.description}`).openPopup();
+            marker.on('click', () => {
+                map.setView([location.lat, location.lng], 14);
+                marker.openPopup();
+            });
+        });
+    } catch (error) {
+        console.error('Leaflet map initialization failed:', error);
+        document.getElementById('map').innerHTML = '<p class="text-center text-red-600 p-4">Failed to load map. Please try again later.</p>';
+    }
 });

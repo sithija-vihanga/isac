@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
         body { font-family: 'Roboto', sans-serif; background: linear-gradient(to bottom, #e9ecef, #d3d7db); display: block; }
         h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
@@ -32,40 +33,77 @@
         .dropdown-menu a:hover { color: #4299e1; background: #f7fafc; }
         section { padding: 4rem 1.5rem; opacity: 0; animation: fadeInSection 1.2s forwards; animation-delay: 0.2s; }
         .container { max-width: 1300px; }
-        #map iframe { width: 100%; height: 450px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        #map { width: 100%; height: 500px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .error { color: #e53e3e; font-size: 0.9rem; display: none; animation: shake 0.3s; }
         #form-feedback { transition: opacity 0.4s ease; }
-        .university-location { transition: transform 0.4s ease, box-shadow 0.4s ease; border-radius: 12px; overflow: hidden; }
-        .university-location:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .university-location:hover .subtext { display: block; opacity: 1; animation: fadeIn 0.3s; }
-        .subtext { display: none; opacity: 0; transition: opacity 0.3s; }
-        .animated-widget { animation: fadeInUp 1.2s ease-in-out; background-color: #bee3f8; padding: 1.2rem; border-radius: 10px; margin-bottom: 1.2rem; text-align: center; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
-        .animated-widget:hover { background-color: #90cdf4; transform: translateY(-3px); }
-        .animated-widget.active { background-color: #90cdf4; }
-        .animated-widget .accordion-content { display: none; animation: slideDown 0.5s; }
-        .animated-widget.active .accordion-content { display: block; }
-        .class-panel { animation: fadeInUp 1.2s ease-in-out; background-color: #bee3f8; padding: 1.2rem; border-radius: 10px; margin-bottom: 1.2rem; text-align: center; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
-        .class-panel:hover { background-color: #90cdf4; transform: translateY(-3px); }
-        .class-panel.active { background-color: #90cdf4; }
-        .class-panel .accordion-content { display: none; animation: slideDown 0.5s; }
-        .class-panel.active .accordion-content { display: block; }
+        .animated-widget { 
+            animation: fadeInUp 1.2s ease-in-out; 
+            background: linear-gradient(to right, #bee3f8, #90cdf4); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            margin-bottom: 1.5rem; 
+            text-align: center; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 1px solid #4299e1; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .animated-widget:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            background: linear-gradient(to right, #90cdf4, #63b3ed); 
+        }
+        .animated-widget i { font-size: 1.5rem; margin-right: 0.5rem; }
+        .animated-widget .accordion-content { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            z-index: 10; 
+            background: white; 
+            border: 1px solid #ccc; 
+            padding: 1.2rem; 
+            width: 300px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            animation: slideDown 0.3s ease; 
+        }
+        .class-panel { 
+            animation: fadeInUp 1.2s ease-in-out; 
+            background: linear-gradient(to right, #bee3f8, #90cdf4); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            margin-bottom: 1.5rem; 
+            text-align: center; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            border: 1px solid #4299e1; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .class-panel:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            background: linear-gradient(to right, #90cdf4, #63b3ed); 
+        }
+        .class-panel i { font-size: 1.5rem; margin-right: 0.5rem; }
         @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInSection { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
-        @keyframes slideDown { 0% { opacity: 0; height: 0; } 100% { opacity: 1; height: auto; } }
+        @keyframes slideDown { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes zoomIn { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         @media (max-width: 768px) {
             .hero { height: 450px; }
             .hero-content { padding: 1.5rem; }
             .hero-content h2 { font-size: 2.5rem; }
-            #map iframe { height: 350px; }
-            .map-section { flex-direction: column; }
-            .university-location { padding: 1.2rem; }
+            #map { height: 350px; }
             .exam-prep-container { flex-direction: column; }
             .classes-container { grid-template-columns: 1fr; }
+            .animated-widget .accordion-content { width: 100%; }
         }
     </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
     <header class="sticky top-0 bg-white shadow-lg z-10 transition-shadow duration-300">
@@ -152,28 +190,7 @@
             </div>
         </div>
         <h3 class="text-3xl font-bold text-center mb-8 animate-fadeInUp">University Locations</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 map-section">
-            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
-                <img src="resources/bologna-map.jpg" alt="Bologna Map" class="w-full h-32 object-cover mb-4 rounded-lg">
-                <h4 class="font-bold mb-2">Bologna</h4>
-                <p class="subtext text-gray-600">Vibrant student city with historic charm.</p>
-            </div>
-            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
-                <img src="resources/naples-map.jpg" alt="Naples Map" class="w-full h-32 object-cover mb-4 rounded-lg">
-                <h4 class="font-bold mb-2">Naples</h4>
-                <p class="subtext text-gray-600">Dynamic coastal city with rich culture.</p>
-            </div>
-            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
-                <img src="resources/rome-map.jpg" alt="Rome Map" class="w-full h-32 object-cover mb-4 rounded-lg">
-                <h4 class="font-bold mb-2">Rome</h4>
-                <p class="subtext text-gray-600">Eternal city blending history and innovation.</p>
-            </div>
-            <div class="university-location p-6 bg-white rounded-lg shadow-md cursor-pointer">
-                <img src="resources/pavia-map.jpg" alt="Pavia Map" class="w-full h-32 object-cover mb-4 rounded-lg">
-                <h4 class="font-bold mb-2">Pavia</h4>
-                <p class="subtext text-gray-600">Charming town with a focus on academics.</p>
-            </div>
-        </div>
+        <div id="map" class="map-section"></div>
     </section>
 
     <section id="scholarships" class="bg-white py-12">
@@ -188,11 +205,11 @@
         <p id="tolc-description" class="text-lg text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">Prepare for the TOLC-I entrance exam for engineering programs in Italy. It consists of 50 MCQ questions over 1 hour and 50 minutes, available online at home for €39.</p>
         <div class="flex flex-col md:flex-row gap-8 exam-prep-container max-w-4xl mx-auto">
             <div class="w-full md:w-1/2 flex flex-col gap-6">
-                <div class="animated-widget accordion-header"><i class="fas fa-clock text-blue-600 mr-2"></i>Timed Exam</div>
+                <div class="animated-widget"><i class="fas fa-clock text-blue-600"></i>Timed Exam</div>
                 <div class="accordion-content text-gray-700">The exam is timed to simulate real conditions, helping you manage time effectively.</div>
-                <div class="animated-widget accordion-header"><i class="fas fa-question-circle text-blue-600 mr-2"></i>Multiple Choice</div>
+                <div class="animated-widget"><i class="fas fa-question-circle text-blue-600"></i>Multiple Choice</div>
                 <div class="accordion-content text-gray-700">50 multiple-choice questions covering key engineering topics.</div>
-                <div class="animated-widget accordion-header"><i class="fas fa-laptop text-blue-600 mr-2"></i>Online at Home</div>
+                <div class="animated-widget"><i class="fas fa-laptop text-blue-600"></i>Online at Home</div>
                 <div class="accordion-content text-gray-700">Take the exam online from home for only €39, making it accessible and affordable.</div>
             </div>
             <div class="w-full md:w-1/2">
@@ -202,16 +219,11 @@
         <h3 class="text-3xl font-bold mb-6 mt-10 animate-fadeInUp">Classes Conducted</h3>
         <p id="classes-description" class="text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">Join our interactive classes for TOLC-I preparation.</p>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-4xl mx-auto classes-container">
-            <div class="class-panel"><i class="fas fa-laptop-code text-blue-600 mr-2"></i>Online Quizzes</div>
-            <div class="accordion-content text-gray-700">Interactive quizzes to test your knowledge.</div>
-            <div class="class-panel"><i class="fas fa-video text-blue-600 mr-2"></i>Live Sessions</div>
-            <div class="accordion-content text-gray-700">Live and recorded sessions with expert tutors.</div>
-            <div class="class-panel"><i class="fas fa-question text-blue-600 mr-2"></i>Revision Q&A</div>
-            <div class="accordion-content text-gray-700">Live Q&A sessions for quick revision.</div>
-            <div class="class-panel"><i class="fas fa-file-alt text-blue-600 mr-2"></i>Mock Tests</div>
-            <div class="accordion-content text-gray-700">Full-length practice exams simulating TOLC-I.</div>
-            <div class="class-panel"><i class="fas fa-book text-blue-600 mr-2"></i>Sample Papers</div>
-            <div class="accordion-content text-gray-700">Previous years' question papers for practice.</div>
+            <div class="class-panel"><i class="fas fa-laptop-code text-blue-600"></i>Online Quizzes</div>
+            <div class="class-panel"><i class="fas fa-video text-blue-600"></i>Live Sessions</div>
+            <div class="class-panel"><i class="fas fa-question text-blue-600"></i>Revision Q&A</div>
+            <div class="class-panel"><i class="fas fa-file-alt text-blue-600"></i>Mock Tests</div>
+            <div class="class-panel"><i class="fas fa-book text-blue-600"></i>Sample Papers</div>
         </div>
         <h3 class="text-3xl font-bold mb-6 mt-10 animate-fadeInUp">Duration</h3>
         <p id="duration" class="text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">4 months (flexible start dates).</p>
