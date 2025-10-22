@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fallback content
     const fallbackContent = {
-        about: "IUA helps students secure admissions to top Italian universities for engineering programs.",
-        whyItaly: "Study engineering in Italy with affordable fees and English-taught programs.<h4>Cultural Immersion</h4><ul><li>Experience Italy's rich culture</li></ul>",
+        about: "ISAC helps students secure admissions to top Italian universities for engineering programs.",
+        whyItaly: "Experience world-class engineering education in Italy, blending cutting-edge innovation with rich cultural heritage.<h4>Cultural Immersion</h4><ul><li>Experience Italy's rich culture</li></ul>",
         tolc_description: "Prepare for the TOLC-I entrance exam for engineering programs in Italy. It consists of 50 MCQ questions over 1 hour and 50 minutes, available online at home for €39.<h4>Exam Format</h4><ul><li>Multiple-choice questions</li></ul>",
         classes_description: "Join our interactive classes for TOLC-I preparation.",
         duration: "4 months (flexible start dates)",
@@ -29,17 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
         university4_degrees: "Building Construction Engineering",
         university4_description: "Focus on practical engineering in a student-friendly city.<h4>Programs</h4><ul><li>Hands-on projects</li></ul>",
         university4_admissions: "Requires high school diploma and TOLC-I score.",
-        testimonial1_quote: "IUA helped me get into my dream university!",
-        testimonial1_name: "John Doe, Student",
-        news1_title: "IUA News",
-        news1_description: "Latest updates from IUA.<h4>Highlights</h4><ul><li>New programs</li></ul>",
-        news2_title: "IUA Events",
-        news2_description: "Recent events hosted by IUA.<h4>Activities</h4><ul><li>Workshops</li></ul>",
-        news3_title: "IUA Partnerships",
+        testimonial1_quote: "They guided me in the admissions process and helped me with the entrance exam preparation.",
+        testimonial1_name: "Ayesh",
+        testimonial1_degree: "Artificial Intelligence",
+        testimonial1_university: "University of Napoli Federico II",
+        news1_title: "ISAC News",
+        news1_description: "Latest updates from ISAC.<h4>Highlights</h4><ul><li>New programs</li></ul>",
+        news2_title: "ISAC Events",
+        news2_description: "Recent events hosted by ISAC.<h4>Activities</h4><ul><li>Workshops</li></ul>",
+        news3_title: "ISAC Partnerships",
         news3_description: "New collaborations with universities.<h4>Outcomes</h4><ul><li>Enhanced programs</li></ul>",
         scholarships: "Explore scholarships for engineering students in Italy.<div class='flex flex-col gap-4 mt-4'><h3 class='accordion-header text-xl font-bold flex justify-between cursor-pointer'>Scholarships up to €6000/year <i class='fas fa-chevron-down'></i></h3><div class='accordion-content text-gray-700'>Merit-based scholarships covering living expenses and tuition for outstanding students in engineering programs.</div><h3 class='accordion-header text-xl font-bold flex justify-between cursor-pointer'>Course Fee Waivers up to €156/year <i class='fas fa-chevron-down'></i></h3><div class='accordion-content text-gray-700'>Income-based waivers reducing tuition fees to as low as €156/year for eligible international students.</div></div>",
-        visa: "Learn about visa requirements for studying in Italy.",
-        hero_texts: ["Welcome to IUA", "Study Engineering in Italy", "Join Top Universities", "Start Your Journey"]
+        hero_texts: ["Welcome to ISAC", "Study Engineering in Italy", "Join Top Universities", "Start Your Journey"]
     };
 
     // Debug function to check DOM elements
@@ -51,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'university2-degrees', 'university2-description', 'university3-name',
             'university3-degrees', 'university3-description', 'university4-name',
             'university4-degrees', 'university4-description', 'testimonial1-quote',
-            'testimonial1-name', 'news1-title', 'news1-description', 'news2-title',
-            'news2-description', 'news3-title', 'news3-description', 'scholarships-content', 'visa-content'
+            'testimonial1-name', 'testimonial1-degree', 'testimonial1-university',
+            'news1-title', 'news1-description', 'news2-title', 'news2-description',
+            'news3-title', 'news3-description', 'scholarships-content'
         ];
         elements.forEach(id => {
             const el = document.getElementById(id);
@@ -89,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('university4-description').innerHTML = content.university4_description;
         document.getElementById('testimonial1-quote').innerHTML = content.testimonial1_quote;
         document.getElementById('testimonial1-name').innerHTML = content.testimonial1_name;
+        document.getElementById('testimonial1-degree').innerHTML = content.testimonial1_degree;
+        document.getElementById('testimonial1-university').innerHTML = content.testimonial1_university;
         document.getElementById('news1-title').innerHTML = content.news1_title + ' <i class="fas fa-chevron-down"></i>';
         document.getElementById('news1-description').innerHTML = content.news1_description;
         document.getElementById('news2-title').innerHTML = content.news2_title + ' <i class="fas fa-chevron-down"></i>';
@@ -96,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('news3-title').innerHTML = content.news3_title + ' <i class="fas fa-chevron-down"></i>';
         document.getElementById('news3-description').innerHTML = content.news3_description;
         document.getElementById('scholarships-content').innerHTML = content.scholarships;
-        document.getElementById('visa-content').innerHTML = content.visa;
         const headline = document.getElementById('hero-headline');
         let textIndex = 0;
         function rotateText() {
